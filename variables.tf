@@ -50,7 +50,7 @@ variable "deployment_bucket_kms_key_arn" {
 
 variable "account_name" {
   type        = string
-  description = "The shortname of the AWS account, i.e. 'fe', 'la', etc."
+  description = "The shortname of the AWS accounts, i.e. 'dev', 'stage', etc."
 }
 
 variable "security_group_cidr_block_egress" {
