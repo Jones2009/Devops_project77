@@ -1,0 +1,25 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "GetLambdaFunction",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:List*",
+                "s3:GetObjectTagging"
+            ],
+            "Resource": "arn:aws:s3:::${deployment_s3_bucket}/*"
+        },
+        {
+            "Sid": "AccessKMSKey",
+            "Effect": "Allow",
+            "Action": [
+                "kms:GenerateDataKey",
+                "kms:DescribeKey",
+                "kms:Decrypt*"
+            ],
+            "Resource": "${kms_key_arn}"
+        }
+    ]
+}

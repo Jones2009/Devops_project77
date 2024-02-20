@@ -1,0 +1,35 @@
+{
+    "Version": "2012-10-17",
+    "Id": "key-default-1",
+    "Statement": [
+        {
+            "Sid": "Enable IAM Admin Permissions",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": ${admin_ids}
+            },
+            "Action": "kms:*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "Decrypt Key Access for S3 Access",
+            "Action": [
+              "kms:Decrypt*",
+              "kms:Encrypt*",
+              "kms:Describe*",
+              "kms:ReEncrypt*",
+              "kms:GenerateDataKey*"
+            ],
+            "Effect": "Allow",
+            "Principal": {
+              "Service": ${log_service}
+            },
+            "Resource": "*",
+            "Condition": {
+              "ArnEquals": {
+                "kms:EncryptionContext:aws:logs:arn": ${log_group_arn}
+              }
+            }
+          }       
+    ]
+}
